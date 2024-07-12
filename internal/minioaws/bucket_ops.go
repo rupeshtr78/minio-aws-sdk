@@ -45,8 +45,16 @@ func ListMinioBucketsWithContext(client *s3.S3, ctx aws.Context) (*s3.ListBucket
 // Returns an error if the bucket creation fails.
 func CreateMinioBucket(ctx context.Context, client *s3.S3, bucketName string) error {
 
+	// Check to see if the bucket already exists
+	_, err := client.HeadBucketWithContext(ctx, &s3.HeadBucketInput{
+		Bucket: &bucketName,
+	})
+	if err == nil {
+		return nil
+	}
+
 	// Create a new bucket
-	_, err := client.CreateBucketWithContext(ctx, &s3.CreateBucketInput{
+	_, err = client.CreateBucketWithContext(ctx, &s3.CreateBucketInput{
 		Bucket: &bucketName,
 	})
 	if err != nil {

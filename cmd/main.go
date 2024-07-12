@@ -24,9 +24,16 @@ func main() {
 	// }
 	// fmt.Println(buckets1)
 
+	// Create a new bucket
+	err = minioaws.CreateMinioBucket(ctx, client, "test-bucket")
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	buckets, err := minioaws.ListMinioBucketsWithContext(client, ctx)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(buckets)
+	fmt.Println(buckets.Buckets)
+
 }
