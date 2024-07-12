@@ -22,7 +22,7 @@ To set up AWS S3 CLI to work with MinIO, follow these steps:
 
 2. Configure AWS CLI with MinIO credentials:
 ```
-aws configure
+aws configure --profile minio
 ```
 Enter your MinIO access key, secret key, and region (e.g., us-east-1).
 
@@ -31,7 +31,7 @@ Enter your MinIO access key, secret key, and region (e.g., us-east-1).
 aws configure set default.s3.signature_version s3v4
 ```
 
-4. When using AWS CLI commands with MinIO, always include the `--endpoint-url` parameter pointing to your MinIO server:
+4. When using AWS CLI commands with MinIO,  One option is to include the `--endpoint-url` parameter pointing to your MinIO server:
 ```
 aws --endpoint-url https://your-minio-server:9000 s3 <command>
 ```
@@ -62,6 +62,11 @@ aws s3 ls --profile <profile_name>
 export AWS_PROFILE=<profile_name>
 
 aws s3 ls
+```
+
+### Aws Config File
+
+```bash
 
 ~/.aws/config
 
@@ -76,11 +81,6 @@ services = miniosrv
 
 [services miniosrv]
 s3 =
-    endpoint_url = http://10.0.0.200:9000
+    endpoint_url = your-minio-server:9000
 
-
-```bash
-aws --endpoint-url http://10.0.0.213:9000 s3api list-objects --bucket obsidian
-
-aws --endpoint-url http://10.0.0.213:9000 s3 ls obsidian/
 ```
