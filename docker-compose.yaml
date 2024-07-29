@@ -7,7 +7,7 @@ services:
     user: 1000:1000
     environment:
       MINIO_ROOT_USER: rupesh
-      MINIO_ROOT_PASSWORD: we12come
+      MINIO_ROOT_PASSWORD: xxxxxx
     ports:
       - "9000:9000"
       - "9001:9001"
